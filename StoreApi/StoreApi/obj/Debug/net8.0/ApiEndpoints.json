@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "AuthController",
+    "ContainingType": "StoreApi.Controllers.AuthController",
     "Method": "LoginAsync",
     "RelativePath": "api/login",
     "HttpMethod": "POST",

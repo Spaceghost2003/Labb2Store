@@ -1,4 +1,9 @@
-﻿
+﻿@using StoreApi.Models
+@using StoreApiFrontEnd.Services.Interfaces
+@using StoreApiFrontEnd.Services
+@inject IUserService _userService
+@inject IAuthService _authService
+@implements IDisposable
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All">
         Home
@@ -10,3 +15,29 @@
         Manage users 
         </MudNavLink>
 </MudNavMenu>
+<div>
+    <label>
+        Current User: @currentUser
+    </label>
+    </div>
+
+@code {
+    string currentUser = "";
+
+    protected override void OnInitialized()
+    {
+        _authService.OnUserChanged += HandleUserChanged;
+        currentUser = _authService.CurrentUser;
+    }
+
+    private void HandleUserChanged()
+    {
+        currentUser = _authService.CurrentUser;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        _authService.OnUserChanged -= HandleUserChanged;
+    }
+}

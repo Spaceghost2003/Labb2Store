@@ -221,3 +221,4 @@ C:\Users\Jonathan\source\repos\Lab3Store\StoreApiFrontEnd\StoreApiFrontEnd\obj\D
 C:\Users\Jonathan\source\repos\Lab3Store\StoreApiFrontEnd\StoreApiFrontEnd\obj\Debug\net8.0\StoreApiFrontEnd.genruntimeconfig.cache
 C:\Users\Jonathan\source\repos\Lab3Store\StoreApiFrontEnd\StoreApiFrontEnd\obj\Debug\net8.0\ref\StoreApiFrontEnd.dll
 C:\Users\Jonathan\source\repos\Lab3Store\StoreApiFrontEnd\StoreApiFrontEnd\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApiFrontEnd\StoreApiFrontEnd\obj\Debug\net8.0\StoreApiFrontEnd.sourcelink.json

@@ -6,6 +6,7 @@ namespace StoreApiFrontEnd.Services.Interfaces
     {
         Task<bool> LoginAsync(string email);
         Task LogoutAsync();
+        public event Action? OnUserChanged;
         bool IsLoggedIn { get; }
         string? CurrentUser { get; }
     }

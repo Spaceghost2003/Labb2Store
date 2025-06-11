@@ -28,8 +28,14 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStat
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+/*builder.Services.AddScoped<IAuthService, AuthService>();*/
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthService>(sp =>
+{
+    var factory = sp.GetRequiredService<IHttpClientFactory>();
+    var client = factory.CreateClient("StoreApi");
+    return new AuthService(client);
+});
 builder.Services.AddScoped<IUserService>(sp =>
 {
     var factory = sp.GetRequiredService<IHttpClientFactory>();

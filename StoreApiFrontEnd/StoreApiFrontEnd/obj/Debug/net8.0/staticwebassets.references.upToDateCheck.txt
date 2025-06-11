@@ -218,3 +218,17 @@ C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\stat
 C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\source\repos\Lab3Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json

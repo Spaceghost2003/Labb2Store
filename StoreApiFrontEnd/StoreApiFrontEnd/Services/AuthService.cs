@@ -10,11 +10,23 @@ namespace StoreApiFrontEnd.Services
         private bool _isLoggedIn = false;
         private string? _currentUser;
         private string? _token;
-        private readonly HttpClient _httpClient;
+        public event Action? OnUserChanged;
 
         public bool IsLoggedIn => _isLoggedIn;
-        public string? CurrentUser => _currentUser;
+        public string? CurrentUser
+        {
+            get => _currentUser;
+            private set
+            {
+                _currentUser = value;
+                OnUserChanged?.Invoke(); // Notify listeners
+            }
+        }
+
         public string? Token => _token;
+        
+        private readonly HttpClient _httpClient;
+
         public AuthService(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -25,10 +37,15 @@ namespace StoreApiFrontEnd.Services
             try
             {
                 var loginRequest = new { Email = email };
-                var response = await _httpClient.PostAsJsonAsync("api/login", loginRequest);
+                var response = await _httpClient.PostAsJsonAsync("https://localhost:7020/api/login", loginRequest);
 
                 Console.WriteLine($"Response Status: {response.StatusCode}");
                 Console.WriteLine($"Response Content: {await response.Content.ReadAsStringAsync()}");
+
+                if (response == null)
+                {
+
+                }
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -38,7 +55,7 @@ namespace StoreApiFrontEnd.Services
                         _isLoggedIn = true;
                         _currentUser = email;
                         _token = result.Token;
-
+                        OnUserChanged?.Invoke();
                         return true;
                     }
                 }

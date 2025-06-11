@@ -6,14 +6,15 @@
 
 
 
-<form>
+<div>
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input @bind-value="_email"  class="form-control" id="exampleInputEmail1"  placeholder="Enter email">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-    <button type="submit" @onclick="(LoginUser)" class="btn btn-primary">Submit</button>
-</form>
+    <button  @onclick="LoginUser" class="btn btn-primary">Submit</button>
+    <button  @onclick="LogoutUser" class="btn btn-primary">Logout</button>
+</div>
 
 @code {
     private string? _email;
@@ -37,5 +38,11 @@
         {
             Snackbar.Add("Login failed", Severity.Error);
         }
+    }
+    private async Task LogoutUser()
+    {
+         await AuthService.LogoutAsync();
+         Snackbar.Add($"User logged out!", Severity.Success);
+        
     }
 }
