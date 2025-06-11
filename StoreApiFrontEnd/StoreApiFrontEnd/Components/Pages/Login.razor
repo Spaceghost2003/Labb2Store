@@ -1,0 +1,41 @@
+﻿@page "/login"
+@using StoreApiFrontEnd.Services.Interfaces
+@inject NavigationManager NavManager
+@inject IAuthService AuthService
+@inject ISnackbar Snackbar
+
+
+
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input @bind-value="_email"  class="form-control" id="exampleInputEmail1"  placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <button type="submit" @onclick="(LoginUser)" class="btn btn-primary">Submit</button>
+</form>
+
+@code {
+    private string? _email;
+
+    private async Task LoginUser()
+    {
+        Snackbar.Add("button clicked");
+        if (string.IsNullOrWhiteSpace(_email))
+        {
+            Snackbar.Add("Email is required", Severity.Warning);
+            return;
+        }
+
+        var success = await AuthService.LoginAsync(_email);
+        if (success)
+        {
+            Snackbar.Add($"User {_email} logged in!", Severity.Success);
+            
+        }
+        else
+        {
+            Snackbar.Add("Login failed", Severity.Error);
+        }
+    }
+}

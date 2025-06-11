@@ -1,0 +1,102 @@
+﻿@using StoreApi;
+@using StoreApi.Models
+@using MudBlazor;
+@using StoreApiFrontEnd.DTOs;
+@using StoreApiFrontEnd.Components;
+@using StoreApiFrontEnd.Components.Cards;
+@using StoreApiFrontEnd.Services
+@using StoreApiFrontEnd.Services.Interfaces
+
+@page "/Users"
+@rendermode InteractiveServer
+@inject IHttpClientFactory HttpClientFactory
+@inject ISnackbar Snackbar
+
+<PageTitle>User Management</PageTitle>
+<h1>User Management</h1>
+<MudTextField @bind-Value="_searchEmail" Label="Search by Email" Variant="Variant.Outlined" Class="mb-4" Immediate="true" />
+
+<MudDataGrid T="UserDto" Items="@FilteredUsers" Striped="true" Hover="true" Bordered="true">
+    <Columns>
+
+        <PropertyColumn Property="UserDto => UserDto.Id" />
+        <PropertyColumn Property="UserDto => UserDto.FullName" />
+        <PropertyColumn Property="UserDto => UserDto.Email" />
+        <PropertyColumn Property="UserDto => UserDto.PhoneNumber" />
+        <PropertyColumn Property="UserDto => UserDto.Address" />
+
+    </Columns>
+</MudDataGrid>
+
+<MudPaper Class="pa-4 mx-auto mt-5" MaxWidth="500px">
+    <MudText Typo="Typo.h5" Class="mb-4">Create New User</MudText>
+    <MudForm @ref="_form" Model="_user">
+        <MudTextField @bind-Value="_user.FirstName" Label="First Name" Required="true" />
+        <MudTextField @bind-Value="_user.LastName" Label="Last Name" Required="true" />
+        <MudTextField @bind-Value="_user.Email" Label="Email" Required="true" />
+        <MudTextField @bind-Value="_user.Address" Label="Address" />
+
+        <MudButton OnClick="Submit" Color="Color.Primary" Variant="Variant.Filled" Class="mt-4">Create User</MudButton>
+    </MudForm>
+</MudPaper>
+
+<a class="btn btn-primary" href="/AddUser">Add User</a>
+@code {
+    @inject IUserService userService
+    private MudForm _form;
+
+
+    List<UserDto> userDtos = new List<UserDto>();
+
+    User _user = new User();
+
+    string _searchEmail = string.Empty;
+    private IEnumerable<UserDto> FilteredUsers =>
+        string.IsNullOrWhiteSpace(_searchEmail)
+        ? userDtos
+        : userDtos.Where(u => u.Email != null && u.Email.Contains(_searchEmail, StringComparison.OrdinalIgnoreCase));
+    protected override async Task OnInitializedAsync()
+    {
+        var httpClient = HttpClientFactory.CreateClient("StoreApi");
+
+        userDtos = await httpClient.GetFromJsonAsync<List<UserDto>>("api/users");
+
+    }
+
+    private async Task Submit()
+    {
+        //ts
+        await _form.Validate();
+        if (_form.IsValid )
+        {
+            var userDto = new User
+                {
+                    Id=0,
+                    FirstName = _user.FirstName,
+                    LastName = _user.LastName,
+                    Email = _user.Email,
+                    Address = _user.Address,
+                    PhoneNumber = "0"
+                };
+            try
+            {
+                var createdUser = await userService.CreateUserAsync(userDto);
+                if (createdUser != null)
+                {
+                    Snackbar.Add($"User{createdUser.FirstName} created successfully!", Severity.Success);
+                    _user = new User(); // Reset the form
+                }
+                else
+                {
+                    
+                    Snackbar.Add($"User is null", Severity.Error);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Snackbar.Add($"Error creating user: {Ex.Message}", Severity.Error);
+                Console.WriteLine("error");
+            }
+        }
+    }
+}

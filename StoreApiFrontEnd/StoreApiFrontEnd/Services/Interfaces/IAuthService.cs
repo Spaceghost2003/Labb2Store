@@ -1,0 +1,12 @@
+﻿using StoreApi.Models;
+
+namespace StoreApiFrontEnd.Services.Interfaces
+{
+    public interface IAuthService
+    {
+        Task<bool> LoginAsync(string email);
+        Task LogoutAsync();
+        bool IsLoggedIn { get; }
+        string? CurrentUser { get; }
+    }
+}

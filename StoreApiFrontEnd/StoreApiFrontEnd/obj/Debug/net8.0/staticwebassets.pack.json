@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\StoreApiFrontEnd.bundle.scp.css",
+      "PackagePath": "staticwebassets\\StoreApiFrontEnd.qd2basoc2u.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StoreApiFrontEnd.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StoreApiFrontEnd.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.StoreApiFrontEnd.props",
+      "PackagePath": "build\\StoreApiFrontEnd.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.StoreApiFrontEnd.props",
+      "PackagePath": "buildMultiTargeting\\StoreApiFrontEnd.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.StoreApiFrontEnd.props",
+      "PackagePath": "buildTransitive\\StoreApiFrontEnd.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

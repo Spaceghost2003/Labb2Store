@@ -1,0 +1,56 @@
+﻿@using StoreApi;
+@using StoreApi.Models
+@using MudBlazor;
+@using StoreApiFrontEnd.DTOs;
+@using StoreApiFrontEnd.Components;
+@using StoreApiFrontEnd.Components.Cards;
+
+@page "/"
+
+@inject IHttpClientFactory HttpClientFactory
+<PageTitle>Home</PageTitle>
+
+@foreach(var product in Products)
+{
+    <ProductCard Name="@product.Name"  Price="@product.Price" Description="@product.Description"  />
+}
+
+
+<MudTextField @bind-Value="_searchString" Placeholder="Search by product name..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="mb-3" />
+<MudDataGrid T="Product" Items="@FilteredProducts" Striped="true" Hover="true" Bordered="true">
+    <Columns>
+        <PropertyColumn Property="Product => Product.Id" />
+        <PropertyColumn Property="Product => Product.Name" />
+        <PropertyColumn Property="Product => Product.Price" />
+        <PropertyColumn Property="Product => Product.Description" />
+        <TemplateColumn CellClass="d-flex justify-end">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudButton Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary">Buy</MudButton>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>
+
+@code{
+    
+    string _searchString = string.Empty;
+
+    List<Product> Products = new List<Product>();
+    
+    
+    IEnumerable<Product> FilteredProducts => Products.Where(p =>
+  string.IsNullOrWhiteSpace(_searchString) ||
+  p.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase));
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var httpClient = HttpClientFactory.CreateClient("StoreApi");
+       
+        Products = await httpClient.GetFromJsonAsync<List<Product>>("api/products");
+       
+    }
+
+}
