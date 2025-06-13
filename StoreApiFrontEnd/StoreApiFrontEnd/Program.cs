@@ -30,6 +30,12 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<IProductService, ProductService>();
 /*builder.Services.AddScoped<IAuthService, AuthService>();*/
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IOrderService, OrderService>(sp =>
+{
+    var factory = sp.GetRequiredService<IHttpClientFactory>();
+    var client = factory.CreateClient("StoreApi");
+    return new OrderService(client);
+});
 builder.Services.AddScoped<IAuthService>(sp =>
 {
     var factory = sp.GetRequiredService<IHttpClientFactory>();

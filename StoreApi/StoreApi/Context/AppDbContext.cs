@@ -18,6 +18,12 @@ namespace StoreApi.Service
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Order>()
+            .HasMany(o => o.OrderItems)
+            .WithOne() 
+            .HasForeignKey(oi => oi.OrderId)
+            .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApi\\StoreApi\\StoreApi.csproj": {}
+    "C:\\Users\\Jonathan\\Source\\Repos\\Labb2Store\\StoreApi\\StoreApi\\StoreApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApi\\StoreApi\\StoreApi.csproj": {
+    "C:\\Users\\Jonathan\\Source\\Repos\\Labb2Store\\StoreApi\\StoreApi\\StoreApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApi\\StoreApi\\StoreApi.csproj",
+        "projectUniqueName": "C:\\Users\\Jonathan\\Source\\Repos\\Labb2Store\\StoreApi\\StoreApi\\StoreApi.csproj",
         "projectName": "StoreApi",
-        "projectPath": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApi\\StoreApi\\StoreApi.csproj",
+        "projectPath": "C:\\Users\\Jonathan\\Source\\Repos\\Labb2Store\\StoreApi\\StoreApi\\StoreApi.csproj",
         "packagesPath": "C:\\Users\\Jonathan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApi\\StoreApi\\obj\\",
+        "outputPath": "C:\\Users\\Jonathan\\Source\\Repos\\Labb2Store\\StoreApi\\StoreApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

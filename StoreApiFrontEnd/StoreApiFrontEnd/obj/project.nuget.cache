@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0yRk7mIn/Js=",
+  "dgSpecHash": "1HDSoYdj0pA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jonathan\\source\\repos\\Lab3Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\StoreApiFrontEnd.csproj",
+  "projectFilePath": "C:\\Users\\Jonathan\\Source\\Repos\\Labb2Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\StoreApiFrontEnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jonathan\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Jonathan\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

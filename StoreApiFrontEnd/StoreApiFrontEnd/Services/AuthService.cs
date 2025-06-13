@@ -19,7 +19,7 @@ namespace StoreApiFrontEnd.Services
             private set
             {
                 _currentUser = value;
-                OnUserChanged?.Invoke(); // Notify listeners
+                OnUserChanged?.Invoke(); 
             }
         }
 

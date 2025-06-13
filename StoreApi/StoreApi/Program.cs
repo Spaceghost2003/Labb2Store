@@ -19,8 +19,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IGenericRepository<Order>, GenericRepository<Order>>();
-builder.Services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+/*builder.Services.AddScoped<IGenericRepository<Order>, GenericRepository<Order>>();
+builder.Services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();*/
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 
 builder.Services.AddCors(options =>

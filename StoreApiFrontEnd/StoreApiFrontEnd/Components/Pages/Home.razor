@@ -4,29 +4,34 @@
 @using StoreApiFrontEnd.DTOs;
 @using StoreApiFrontEnd.Components;
 @using StoreApiFrontEnd.Components.Cards;
+@using StoreApiFrontEnd.Services.Interfaces
+@using StoreApiFrontEnd.Services
+@inject IAuthService _authService
+@inject IUserService _userService
+@inject IOrderService _orderService
 
 @page "/"
 
 @inject IHttpClientFactory HttpClientFactory
 <PageTitle>Home</PageTitle>
 
-@foreach(var product in Products)
-{
-    <ProductCard Name="@product.Name"  Price="@product.Price" Description="@product.Description"  />
-}
 
 
+<br />
+<br />
 <MudTextField @bind-Value="_searchString" Placeholder="Search by product name..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="mb-3" />
+<br />
 <MudDataGrid T="Product" Items="@FilteredProducts" Striped="true" Hover="true" Bordered="true">
     <Columns>
-        <PropertyColumn Property="Product => Product.Id" />
+
         <PropertyColumn Property="Product => Product.Name" />
         <PropertyColumn Property="Product => Product.Price" />
         <PropertyColumn Property="Product => Product.Description" />
+        <PropertyColumn property="Product => Product.Category"/>
         <TemplateColumn CellClass="d-flex justify-end">
             <CellTemplate>
                 <MudStack Row>
-                    <MudButton Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary">Buy</MudButton>
+                    <MudButton Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary" OnClick="@(() => PlaceOrderAsync(context.Item))">Buy</MudButton>
                 </MudStack>
             </CellTemplate>
         </TemplateColumn>
@@ -34,12 +39,12 @@
 </MudDataGrid>
 
 @code{
-    
+
     string _searchString = string.Empty;
 
     List<Product> Products = new List<Product>();
-    
-    
+
+
     IEnumerable<Product> FilteredProducts => Products.Where(p =>
   string.IsNullOrWhiteSpace(_searchString) ||
   p.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase));
@@ -48,9 +53,43 @@
     protected override async Task OnInitializedAsync()
     {
         var httpClient = HttpClientFactory.CreateClient("StoreApi");
-       
+
         Products = await httpClient.GetFromJsonAsync<List<Product>>("api/products");
-       
+
     }
+
+
+    private async Task PlaceOrderAsync(Product product)
+    {
+        var userEmail = _authService.CurrentUser;
+        var users = await _userService.GetUsersAsync();
+        var _user = await _userService.GetUserByEmail(_authService.CurrentUser);
+
+        if (_user == null || product == null)
+            return;
+
+        var order = new Order
+            {
+                
+                UserId = _user.Id,
+                user=_user,
+                OrderItems = new List<OrderItem>
+        {
+            new OrderItem
+            {
+                ProductId = product.Id,
+                OrderId = 0, 
+                Quantity = 1
+            }
+
+            
+        }
+        
+            };
+
+        await _orderService.CreateOrderAsync(order);
+       Console.WriteLine("test");
+    }
+
 
 }
