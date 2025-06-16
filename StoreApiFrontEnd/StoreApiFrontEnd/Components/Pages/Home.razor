@@ -1,4 +1,5 @@
-﻿@using StoreApi;
+﻿
+@using StoreApi;
 @using StoreApi.Models
 @using MudBlazor;
 @using StoreApiFrontEnd.DTOs;
@@ -11,15 +12,20 @@
 @inject IUserService _userService
 @inject IOrderService _orderService
 @inject IProductService _productService
+@inject IDialogService DialogService
 @page "/"
-
 @inject IHttpClientFactory HttpClientFactory
+
 <PageTitle>Home</PageTitle>
 
 
 
 <br />
 <br />
+<EditProductDialog EditingProduct="@editingProduct"
+Visible="@showDialog"
+OnSave="@HandleSave"
+OnCancel="@CloseDialog" />
 <MudTextField @bind-Value="_searchString" Placeholder="Search by product name..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="mb-3" />
 <br />
 <MudDataGrid T="Product" Items="@FilteredProducts" Striped="true" Hover="true" Bordered="true">
@@ -34,14 +40,19 @@
                 <MudStack Row>
                     <MudButton Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary" OnClick="@(() => PlaceOrderAsync(context.Item))">Buy</MudButton>
                 </MudStack>
-        <MudButton Size="Size.Small" Variant="Variant.Outlined" Color="Color.Error"
-        OnClick="@(() => DeleteProductAsync(context.Item.Id))">
-            Delete
-        </MudButton>
+                <MudButton Size="Size.Small" Variant="Variant.Outlined" Color="Color.Error"
+                OnClick="@(() => DeleteProductAsync(context.Item.Id))">
+                    Delete
+                </MudButton>
+                <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Secondary"
+                OnClick="@(() => OpenEditDialog(context.Item))">
+                    Edit
+                </MudButton>
             </CellTemplate>
         </TemplateColumn>
     </Columns>
 </MudDataGrid>
+
 
 
 
@@ -59,16 +70,19 @@
     </MudForm>
 </MudPaper>
 
+
+
 @code{
+
 
     string _searchString = string.Empty;
     private MudForm _form;
     List<Product> Products = new List<Product>();
     Product _product = new Product();
-  
-    IEnumerable<Product> FilteredProducts => Products.Where(p =>
-  string.IsNullOrWhiteSpace(_searchString) ||
-  p.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase));
+
+    List<Product> FilteredProducts => Products.Where(p =>
+    string.IsNullOrWhiteSpace(_searchString) ||
+    p.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase)).ToList();
 
 
     protected override async Task OnInitializedAsync()
@@ -110,6 +124,44 @@
 
         await _orderService.CreateOrderAsync(order);
         Console.WriteLine("test");
+    }
+
+    private bool showDialog = false;
+    private Product editingProduct = new();
+
+    private void OpenEditDialog(Product product)
+    {
+        
+        editingProduct = new Product
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                Category = product.Category
+            };
+
+        showDialog = true;
+    }
+
+    private async Task HandleSave(Product updatedProduct)
+    {
+        showDialog = false;
+
+        var index = Products.FindIndex(p => p.Id == updatedProduct.Id);
+        if (index != -1)
+        {
+            Products[index] = updatedProduct;
+
+            _productService.UpdateProductAsync(updatedProduct.Id, updatedProduct);
+
+            Snackbar.Add($"Product '{updatedProduct.Name}' updated!", Severity.Success);
+        }
+    }
+
+    private async Task CloseDialog()
+    {
+        showDialog = false;
     }
 
     private async Task CreateProduct()

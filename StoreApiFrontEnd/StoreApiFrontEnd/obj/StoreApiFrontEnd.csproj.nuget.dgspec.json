@@ -11,7 +11,7 @@
         "projectName": "StoreApiFrontEnd",
         "projectPath": "C:\\Users\\Jonathan\\Source\\Repos\\Labb2Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\StoreApiFrontEnd.csproj",
         "packagesPath": "C:\\Users\\Jonathan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jonathan\\source\\repos\\Labb2Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\obj\\",
+        "outputPath": "C:\\Users\\Jonathan\\Source\\Repos\\Labb2Store\\StoreApiFrontEnd\\StoreApiFrontEnd\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

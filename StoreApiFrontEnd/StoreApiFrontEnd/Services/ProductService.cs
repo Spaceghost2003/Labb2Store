@@ -31,7 +31,7 @@ namespace StoreApiFrontEnd.Services
         }
         public async Task<Product> UpdateProductAsync(int id, Product product)
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/products/{id}", product);
+            var response = await _httpClient.PutAsJsonAsync($"https://localhost:7020/api/products/{id}", product);
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<Product>();

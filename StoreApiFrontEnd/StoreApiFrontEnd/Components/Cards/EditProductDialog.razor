@@ -1,0 +1,54 @@
+﻿@using StoreApi.Models
+
+@if (Visible)
+{
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5); ">
+        <div class="modal-dialog" role="document" style="margin-top: 200px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Product</h5>
+                    <button type="button" class="btn-close" aria-label="Close" @onclick="Cancel"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input class="form-control" @bind="EditingProduct.Name" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input class="form-control" @bind="EditingProduct.Price" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input class="form-control" @bind="EditingProduct.Description" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <input class="form-control" @bind="EditingProduct.Category" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" @onclick="Save">Save</button>
+                    <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public Product EditingProduct { get; set; }
+    [Parameter] public EventCallback<Product> OnSave { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+    [Parameter] public bool Visible { get; set; }
+
+    private async Task Save()
+    {
+        await OnSave.InvokeAsync(EditingProduct);
+    }
+
+    private async Task Cancel()
+    {
+        await OnCancel.InvokeAsync();
+    }
+}
