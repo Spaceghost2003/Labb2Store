@@ -65,7 +65,7 @@
 
     private async Task Submit()
     {
-        //ts
+        
         await _form.Validate();
         if (_form.IsValid )
         {
@@ -84,7 +84,7 @@
                 if (createdUser != null)
                 {
                     Snackbar.Add($"User{createdUser.FirstName} created successfully!", Severity.Success);
-                    _user = new User(); // Reset the form
+                    _user = new User(); 
                 }
                 else
                 {

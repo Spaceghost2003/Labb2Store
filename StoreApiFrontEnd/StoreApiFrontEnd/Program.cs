@@ -27,7 +27,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductService, ProductService>(sp =>
+{
+    var factory = sp.GetRequiredService<IHttpClientFactory>();
+    var client = factory.CreateClient("StoreApi");
+    return new ProductService(client);
+});
 /*builder.Services.AddScoped<IAuthService, AuthService>();*/
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IOrderService, OrderService>(sp =>

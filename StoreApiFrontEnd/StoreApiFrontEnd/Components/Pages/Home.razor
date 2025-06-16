@@ -6,10 +6,11 @@
 @using StoreApiFrontEnd.Components.Cards;
 @using StoreApiFrontEnd.Services.Interfaces
 @using StoreApiFrontEnd.Services
+@inject ISnackbar Snackbar
 @inject IAuthService _authService
 @inject IUserService _userService
 @inject IOrderService _orderService
-
+@inject IProductService _productService
 @page "/"
 
 @inject IHttpClientFactory HttpClientFactory
@@ -27,24 +28,44 @@
         <PropertyColumn Property="Product => Product.Name" />
         <PropertyColumn Property="Product => Product.Price" />
         <PropertyColumn Property="Product => Product.Description" />
-        <PropertyColumn property="Product => Product.Category"/>
+        <PropertyColumn Property="Product => Product.Category"/>
         <TemplateColumn CellClass="d-flex justify-end">
             <CellTemplate>
                 <MudStack Row>
                     <MudButton Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary" OnClick="@(() => PlaceOrderAsync(context.Item))">Buy</MudButton>
                 </MudStack>
+        <MudButton Size="Size.Small" Variant="Variant.Outlined" Color="Color.Error"
+        OnClick="@(() => DeleteProductAsync(context.Item.Id))">
+            Delete
+        </MudButton>
             </CellTemplate>
         </TemplateColumn>
     </Columns>
 </MudDataGrid>
 
+
+
+
+
+<MudPaper Class="pa-4 mx-auto mt-5" MaxWidth="500px">
+    <MudText Typo="Typo.h5" Class="mb-4">Create New Product</MudText>
+    <MudForm @ref="_form" Model="_product">
+        <MudTextField @bind-Value="_product.Name" Label="Name" Required="true" />
+        <MudTextField @bind-Value="_product.Category" Label="Category" Required="true" />
+        <MudTextField @bind-Value="_product.Price" Label="Price" Required="true" />
+        <MudTextField @bind-Value="_product.Description" Label="Description" />
+
+        <MudButton OnClick="CreateProduct" Color="Color.Primary" Variant="Variant.Filled" Class="mt-4">Create User</MudButton>
+    </MudForm>
+</MudPaper>
+
 @code{
 
     string _searchString = string.Empty;
-
+    private MudForm _form;
     List<Product> Products = new List<Product>();
-
-
+    Product _product = new Product();
+  
     IEnumerable<Product> FilteredProducts => Products.Where(p =>
   string.IsNullOrWhiteSpace(_searchString) ||
   p.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase));
@@ -70,7 +91,7 @@
 
         var order = new Order
             {
-                
+
                 UserId = _user.Id,
                 user=_user,
                 OrderItems = new List<OrderItem>
@@ -82,14 +103,57 @@
                 Quantity = 1
             }
 
-            
+
         }
-        
+
             };
 
         await _orderService.CreateOrderAsync(order);
-       Console.WriteLine("test");
+        Console.WriteLine("test");
     }
 
+    private async Task CreateProduct()
+    {
+        await _form.Validate();
+        if (_form.IsValid)
+        {
+            var product = new Product 
+                {
+                Id=0,
+                Name=_product.Name,
+                Category=_product.Category,
+                Price=_product.Price,
+                Description=_product.Description
+                };
+            try
+            {
+                var createdProduct = await _productService.CreateProductAsync(product);
+                if (createdProduct != null)
+                {
+                    Snackbar.Add($"Product {createdProduct.Name} created successfully!", Severity.Success);
+                    _product = new Product();
+                }
+                else
+                {
+
+                    Snackbar.Add($"Product is null", Severity.Error);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Snackbar.Add($"Error creating product: {Ex.Message}", Severity.Error);
+                Console.WriteLine("error");
+            }
+        }
+    }
+
+    private async Task DeleteProductAsync(int productId)
+    {
+        var product = FilteredProducts.FirstOrDefault(p => p.Id == productId);
+        if (product is not null)
+        {
+            await _productService.DeleteProductAsync(productId);
+        }
+    }
 
 }

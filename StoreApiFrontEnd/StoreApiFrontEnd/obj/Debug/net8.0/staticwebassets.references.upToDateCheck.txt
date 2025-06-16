@@ -272,3 +272,8 @@ C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\sta
 C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Jonathan\Source\Repos\Labb2Store\StoreApi\StoreApi\obj\Debug\net8.0\staticwebassets.build.json
