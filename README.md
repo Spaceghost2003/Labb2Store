@@ -1,5 +1,7 @@
 API Specification
 
+Frontend only intended for testing purposes
+
 ```
 openapi: 3.0.0
 info:
